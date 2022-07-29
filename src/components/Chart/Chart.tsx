@@ -24,8 +24,8 @@ import moment from 'moment';
 // }
 
 // interface ResponseObject {
+//   field1: string;
 //   field2: string;
-//   field3: string;
 // }
 
 const serverUrl = 'https://meteo-dourbes.bartroorda.nl';
@@ -54,19 +54,19 @@ const Chart = () => {
 
   let data = tempData.map(x => {
     return {
-      timestamp: x.field2,
-      name: moment.utc(x.field2, 'x').format('DD MMM HH:mm'),
-      temp: x.field3
+      timestamp: x.field1,
+      name: moment.utc(x.field1, 'x').format('DD MMM HH:mm'),
+      temp: x.field2
     }
   })
   
   data = data.map(x => {
     const foundRecord = precipData.filter(precip => {
-      return precip.field2 === x.timestamp;
+      return precip.field1 === x.timestamp;
     });
     if(! foundRecord || foundRecord.length === 0) return x;
     return Object.assign({}, x, {
-      precip: foundRecord[0].field3
+      precip: foundRecord[0].field2
     });
   })
 
