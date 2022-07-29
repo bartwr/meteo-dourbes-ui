@@ -28,7 +28,7 @@ import moment from 'moment';
 //   field3: string;
 // }
 
-const serverUrl = 'https://meteo-dourbes.bartroorda.nl/';
+const serverUrl = 'https://meteo-dourbes.bartroorda.nl';
 
 const Chart = () => {
 
