@@ -6,12 +6,9 @@ export const About: React.FC = () => {
 
   return (
     <Fragment>
-      <h1>About</h1>
+      <h1>Over</h1>
       <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas
-        possimus doloribus error cumque autem asperiores, ullam deserunt quidem
-        omnis doloremque itaque eius eaque sint facilis unde tenetur reiciendis
-        aliquam soluta?
+        Hier vind je statistieken mbt het weer in Dourbes. De code van deze applicatie staat op <a href="https://github.com/bartwr/meteo-dourbes" target="_blank">github.com/bartwr/meteo-dourbes</a> (de server) en <a href="https://github.com/bartwr/meteo-dourbes-ui" target="_blank">github.com/bartwr/meteo-dourbes-ui</a> (de site).
       </p>
       <button
         type="button"
@@ -19,7 +16,7 @@ export const About: React.FC = () => {
         cy-data="go-back-button"
         onClick={() => history.push('/')}
       >
-        Go back
+        Terug
       </button>
     </Fragment>
   )
