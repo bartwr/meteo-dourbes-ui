@@ -1,6 +1,7 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, useEffect } from 'react'
 // import Counter from '../components/counter/Counter'
 import Chart from '../components/Chart/Chart'
+import JSConfetti from 'js-confetti'
 
 const serverUrl = 'http://162.55.161.20';
 const csvFiles = [
@@ -14,6 +15,17 @@ const csvFiles = [
 ]
 
 export const Home: React.FC = () => {
+
+  useEffect(() => {
+    const jsConfetti = new JSConfetti()
+    jsConfetti.addConfetti({
+      // emojis: ['🌈', '⚡️', '💥', '✨', '💫', '🌸'],
+      // confettiColors: [
+      //  '#ff0a54', '#ff477e', '#ff7096', '#ff85a1', '#fbb1bd', '#f9bec7',
+      // ]
+   })
+  }, []);
+
   return (
     <Fragment>
       <p>

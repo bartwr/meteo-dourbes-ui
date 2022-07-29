@@ -4,6 +4,7 @@
 
     npm run deploy
 
+
 ____
 
 [![npm version](https://badge.fury.io/js/cra-template-typescript-redux.svg)](https://badge.fury.io/js/cra-template-typescript-redux)

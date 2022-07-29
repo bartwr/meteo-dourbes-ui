@@ -10,7 +10,7 @@ import {
   LineChart,
   Line,
   XAxis,
-  // Legend,
+  Legend,
   YAxis,
   CartesianGrid,
   Tooltip,
@@ -60,7 +60,6 @@ const Chart = () => {
     }
   })
   
-  console.log(data);
   data = data.map(x => {
     const foundRecord = precipData.filter(precip => {
       return precip.field2 === x.timestamp;
@@ -81,6 +80,7 @@ const Chart = () => {
           <XAxis dataKey="name" />
           <YAxis />
           <Tooltip />
+          <Legend verticalAlign="top" height={36}/>
         </LineChart>
       </ResponsiveContainer>
     </div>
