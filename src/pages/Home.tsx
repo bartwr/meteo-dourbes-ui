@@ -3,7 +3,7 @@ import React, { Fragment, useEffect } from 'react'
 import Chart from '../components/Chart/Chart'
 import JSConfetti from 'js-confetti'
 
-const serverUrl = 'http://162.55.161.20';
+const serverUrl = 'https://meteo-dourbes.bartroorda.nl/';
 const csvFiles = [
   'temp.csv',
   'precip.csv',
