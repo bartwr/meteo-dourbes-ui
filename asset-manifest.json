@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/meteo-dourbes-ui/static/css/main.9ecb25bd.css",
+    "main.js": "/meteo-dourbes-ui/static/js/main.dc62d452.js",
+    "index.html": "/meteo-dourbes-ui/index.html",
+    "main.9ecb25bd.css.map": "/meteo-dourbes-ui/static/css/main.9ecb25bd.css.map",
+    "main.dc62d452.js.map": "/meteo-dourbes-ui/static/js/main.dc62d452.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.9ecb25bd.css",
+    "static/js/main.dc62d452.js"
+  ]
+}
