@@ -1,4 +1,8 @@
-import React, { Fragment, useEffect } from 'react'
+import React, {
+  Fragment,
+  useEffect,
+  useState
+} from 'react'
 // import { useSelector, useDispatch } from 'react-redux'
 // import { actionTypes, selectors } from '../../features/counter'
 
@@ -13,27 +17,66 @@ import {
   ResponsiveContainer
 } from 'recharts';
 
+import moment from 'moment';
+
 // interface ChartProps {
 //   // chartKey: string;
 // }
 
+// interface ResponseObject {
+//   field2: string;
+//   field3: string;
+// }
+
+const serverUrl = 'http://162.55.161.20';
+
 const Chart = () => {
-  // const count = useSelector(selectors.getCountValue)
-  // const dispatch = useDispatch()
+
+  const [tempData, setTempData] = useState<any[]>([]);
+  const [precipData, setPrecipData] = useState<any[]>([]);
+
+  const getTempData = async () => {
+    const response = await fetch(`${serverUrl}/api/temp`);
+    const json = await response.json();
+    setTempData(json);
+  }
+
+  const getPrecipData = async () => {
+    const response = await fetch(`${serverUrl}/api/precip`);
+    const json = await response.json();
+    setPrecipData(json);
+  }
 
   useEffect(() => {
+    getTempData();
+    getPrecipData();
   }, [])
 
-  const data = [
-    {name: 'Page A', uv: 400, pv: 2400, amt: 2400},
-    {name: 'Page B', uv: 600, pv: 22400, amt: 24001}
-  ];
+  let data = tempData.map(x => {
+    return {
+      timestamp: x.field2,
+      name: moment.utc(x.field2, 'x').format('DD MMM HH:mm'),
+      temp: x.field3
+    }
+  })
+  
+  console.log(data);
+  data = data.map(x => {
+    const foundRecord = precipData.filter(precip => {
+      return precip.field2 === x.timestamp;
+    });
+    if(! foundRecord || foundRecord.length === 0) return x;
+    return Object.assign({}, x, {
+      precip: foundRecord[0].field3
+    });
+  })
 
   const renderLineChart = (
     <div style={{ width: '100%', height: 400 }}>
       <ResponsiveContainer>
         <LineChart data={data} margin={{ top: 5, right: 20, bottom: 5, left: 0 }}>
-          <Line type="monotone" dataKey="uv" stroke="#8884d8" />
+          <Line type="monotone" dataKey="temp" stroke="orange" />
+          <Line type="monotone" dataKey="precip" stroke="blue" />
           <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
           <XAxis dataKey="name" />
           <YAxis />
@@ -47,8 +90,8 @@ const Chart = () => {
     <Fragment>
       <div className="row">
         <div className="">
-          <div className="card blue-grey darken-1">
-            <div className="card-content white-text">
+          <div className="card" style={{background: '#eee'}}>
+            <div className="card-content black-text">
               <span className="card-title">Chart component</span>
               <p>
                 Hieronder zie je de temperatuur en neerslag in Dourbes.
