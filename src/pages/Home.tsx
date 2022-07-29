@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react'
-import Counter from '../components/counter/Counter'
+// import Counter from '../components/counter/Counter'
+import Chart from '../components/Chart/Chart'
 
 const serverUrl = 'http://162.55.161.20';
 const csvFiles = [
@@ -26,14 +27,14 @@ export const Home: React.FC = () => {
       </h2>
       <ul>
         {csvFiles.map(x => {
-          return <li>
+          return <li key={x}>
             <a href={`${serverUrl}/data/${x}`} target="_blank">
               {x}
             </a>
           </li>
         })}
       </ul>
-      <Counter />
+      <Chart />
     </Fragment>
   )
 }
