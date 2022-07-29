@@ -55,7 +55,7 @@ const Chart = () => {
   let data = tempData.map(x => {
     return {
       timestamp: x.field1,
-      name: moment.utc(x.field1, 'x').format('DD MMM HH:mm'),
+      name: moment.utc(x.field1, 'x').local().format('DD MMM HH:mm'),
       temp: x.field2
     }
   })
