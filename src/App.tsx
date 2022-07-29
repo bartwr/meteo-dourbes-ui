@@ -7,7 +7,7 @@ import { Home } from './pages/Home'
 
 const App: React.FC = () => {
   return (
-    <BrowserRouter basename={`https://bartwr.github.io/meteo-dourbes-ui/`}>
+    <BrowserRouter basename={`meteo-dourbes-ui`}>
       <Navbar />
       <div className="container">
         <Switch>
