@@ -28,6 +28,13 @@ import moment from 'moment';
 //   field2: string;
 // }
 
+interface DataObject {
+  timestamp: string;
+  name: string;
+  temp: string;
+  precip?: string;
+}
+
 const serverUrl = 'https://meteo-dourbes.bartroorda.nl';
 
 const Chart = () => {
@@ -38,12 +45,14 @@ const Chart = () => {
   const getTempData = async () => {
     const response = await fetch(`${serverUrl}/api/temp`);
     const json = await response.json();
+    // Save to state
     setTempData(json);
   }
 
   const getPrecipData = async () => {
     const response = await fetch(`${serverUrl}/api/precip`);
     const json = await response.json();
+    // Save to state
     setPrecipData(json);
   }
 
@@ -52,12 +61,14 @@ const Chart = () => {
     getPrecipData();
   }, [])
 
-  let data = tempData.map(x => {
-    return {
+  let data: Array<DataObject> = [];
+  tempData.forEach(x => {
+    if(x.field2 === '') return;
+    data.push({
       timestamp: x.field1,
       name: moment.utc(x.field1, 'x').local().format('DD MMM HH:mm'),
       temp: x.field2
-    }
+    })
   })
   
   data = data.map(x => {
