@@ -126,12 +126,13 @@ const Chart = () => {
     <div style={{ width: '100%', height: 500 }}>
       <ResponsiveContainer>
         <LineChart data={data} margin={{ top: 5, right: 20, bottom: 5, left: 0 }}>
-          <Line type="monotone" dataKey="temp" name="Temperatuur" unit=" °C" stroke="orange" />
-          <Line type="monotone" dataKey="precip" name="Neerslag" unit=" mm/u" stroke="blue" />
+          <Line yAxisId="right" type="monotone" dataKey="temp" name="Temperatuur" unit=" °C" stroke="orange" />
+          <Line yAxisId="left" type="monotone" dataKey="precip" name="Neerslag" unit=" mm/u" stroke="blue" />
           <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
           <XAxis dataKey="name" />
-          <YAxis domain={[-10, 20]} />
-         <ReferenceLine y={0} label="" stroke="#666" strokeDasharray="100% 5" />
+          <YAxis yAxisId="left" domain={[0, 15]} />
+          <YAxis yAxisId="right" orientation="right" domain={[-10, 20]} />
+          <ReferenceLine y={0} yAxisId="right" label="" stroke="aqua" strokeDasharray="100% 5" />
          <Tooltip />
           <Legend verticalAlign="top" height={36}/>
           <Brush dataKey="name" />
