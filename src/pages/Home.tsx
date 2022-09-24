@@ -29,7 +29,7 @@ export const Home: React.FC = () => {
   return (
     <Fragment>
       <p>
-        Hoi Chris, gefeliciteerd met je verjaardag!
+        Hoi Chris, nog gefeliciteerd met je verjaardag!
       </p>
       <p>
         Hieronder vind je allereerst de linkjes naar de CSV-bestanden met ruwe data. Daaronder staan grafiekjes met data van de afgelopen maanden.
