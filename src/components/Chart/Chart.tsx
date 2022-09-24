@@ -14,7 +14,9 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
-  ResponsiveContainer
+  Brush,
+  ResponsiveContainer,
+  ReferenceLine
 } from 'recharts';
 
 import moment from 'moment';
@@ -121,16 +123,18 @@ const Chart = () => {
   data = getDataOfLastMonth(data);
 
   const renderLineChart = (
-    <div style={{ width: '100%', height: 400 }}>
+    <div style={{ width: '100%', height: 500 }}>
       <ResponsiveContainer>
         <LineChart data={data} margin={{ top: 5, right: 20, bottom: 5, left: 0 }}>
-          <Line type="monotone" dataKey="temp" stroke="orange" />
-          <Line type="monotone" dataKey="precip" stroke="blue" />
+          <Line type="monotone" dataKey="temp" name="Temperatuur" unit=" °C" stroke="orange" />
+          <Line type="monotone" dataKey="precip" name="Neerslag" unit=" mm/u" stroke="blue" />
           <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
           <XAxis dataKey="name" />
-          <YAxis />
-          <Tooltip />
+          <YAxis domain={[-10, 20]} />
+         <ReferenceLine y={0} label="" stroke="#666" strokeDasharray="100% 5" />
+         <Tooltip />
           <Legend verticalAlign="top" height={36}/>
+          <Brush dataKey="name" />
         </LineChart>
       </ResponsiveContainer>
     </div>
