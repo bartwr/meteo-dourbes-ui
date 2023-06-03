@@ -1,12 +1,22 @@
 import React, {
   Fragment,
-  useState
-  // useEffect
+  useState,
+  useEffect
 } from 'react'
 // import Counter from '../components/counter/Counter'
 // import JSConfetti from 'js-confetti'
 import Chart from '../components/Chart/Chart'
 import List from '../components/List/List'
+
+import {
+  fetchTempData,
+  fetchPrecipData
+} from '../api/meteo'
+
+import {
+  createDataObject,
+  getDataOfLastMonth
+} from '../lib/meteoData';
 
 const serverUrl = 'https://meteo-dourbes.bartroorda.nl';
 const csvFiles = [
@@ -21,19 +31,40 @@ const csvFiles = [
 
 export const Home: React.FC = () => {
 
-  // useEffect(() => {
-  //   const jsConfetti = new JSConfetti()
-  //   jsConfetti.addConfetti({
-  //     // emojis: ['🌈', '⚡️', '💥', '✨', '💫', '🌸'],
-  //     // confettiColors: [
-  //     //  '#ff0a54', '#ff477e', '#ff7096', '#ff85a1', '#fbb1bd', '#f9bec7',
-  //     // ]
-  //  })
-  // }, []);
+  const [view, setView] = useState('list');
+  const [tempData, setTempData] = useState<any[]>([]);
+  const [precipData, setPrecipData] = useState<any[]>([]);
+  const [combinedData, setCombinedData] = useState<any[]>([]);
 
-  const [view, setView] = useState('chart');
+  // Get all chart data of last month
+  useEffect(() => {
+    if(tempData.length === 0 || precipData.length === 0) return;
 
-  console.log('view', view);
+    // Create combined meteo data object
+    let data = createDataObject(tempData, precipData);
+    data = getDataOfLastMonth(data);
+
+    // Convert data arrays to data objects
+    // Inspiration from https://stackoverflow.com/a/36388401
+    data = data.map(x => Object.assign({}, x));
+
+    // Set state variable
+    setCombinedData(data);
+  }, [
+    tempData,
+    precipData
+  ])
+
+  useEffect(() => {
+    (async () => {
+      const temp = await fetchTempData();
+      setTempData(temp);
+    })();
+    (async () => {
+      const precip = await fetchPrecipData();
+      setPrecipData(precip);
+    })();
+  }, [])
 
   return (
     <Fragment>
@@ -49,8 +80,9 @@ export const Home: React.FC = () => {
           {view === 'chart' ? 'tabel' : 'grafiek'}
         </a>
       </div>
-      {view === 'chart' && <Chart />}
-      {view === 'list' && <List />}
+      {view === 'chart' && <Chart combinedData={combinedData} />}
+      {view === 'list' && <List combinedData={combinedData} />}
+      {! combinedData || combinedData.length === 0 ? <p>Data wordt geladen..</p> : <></>}
       <h2>
         Download CSV's
       </h2>
