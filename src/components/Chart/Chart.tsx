@@ -30,7 +30,9 @@ interface DataObject {
 }
 
 let serverUrl = 'https://meteo-dourbes.bartroorda.nl';
-serverUrl = 'http://localhost:5000';
+if(document.location.host === 'localhost:3000') {
+  serverUrl = 'http://localhost:5000';
+}
 
 const Chart = () => {
 
@@ -148,10 +150,8 @@ const Chart = () => {
         <div className="">
           <div className="card" style={{background: '#eee'}}>
             <div className="card-content black-text">
-              <span className="card-title">Chart</span>
-              <p>
-                Hieronder zie je de temperatuur en neerslag in Dourbes.
-              </p>
+              {/*<span className="card-title">Chart</span>*/}
+              {/*<p>Temperatuur en neerslag in Dourbes</p>*/}
             </div>
             {renderLineChart}
           </div>
