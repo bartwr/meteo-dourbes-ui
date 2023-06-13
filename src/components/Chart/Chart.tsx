@@ -31,7 +31,7 @@ const Chart = (params: any) => {
           <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
           <XAxis dataKey="name" />
           <YAxis yAxisId="left" domain={[0, 15]} />
-          <YAxis yAxisId="right" orientation="right" domain={[-10, 20]} />
+          <YAxis yAxisId="right" orientation="right" domain={[-10, 32]} />
           <ReferenceLine y={0} yAxisId="right" label="" stroke="aqua" strokeDasharray="100% 5" />
          <Tooltip />
           <Legend verticalAlign="top" height={36}/>

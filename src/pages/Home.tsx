@@ -31,7 +31,7 @@ const csvFiles = [
 
 export const Home: React.FC = () => {
 
-  const [view, setView] = useState('list');
+  const [view, setView] = useState('chart');
   const [tempData, setTempData] = useState<any[]>([]);
   const [precipData, setPrecipData] = useState<any[]>([]);
   const [combinedData, setCombinedData] = useState<any[]>([]);

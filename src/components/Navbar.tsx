@@ -7,7 +7,7 @@ export const Navbar: React.FC = () => (
       overflow: 'hidden',
       background: '#720074'
     }}>
-      <NavLink to="/" className="brand-logo">
+      <NavLink to="/" style={{fontSize: '2.1rem'}}>
         Het weer in Dourbes
       </NavLink>
       <ul className="right hide-on-med-and-down">
